@@ -4,20 +4,17 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj.SynchronousInterrupt;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private final TalonFX m_shooterMotor = new TalonFX(0);
+  private final TalonFX shooterMotor_ = new TalonFX(0);
 
 
 
@@ -37,11 +34,11 @@ public class ShooterSubsystem extends SubsystemBase {
     var motionMagicConfigs = talonFXConfigs.MotionMagic;
     motionMagicConfigs.MotionMagicCruiseVelocity = 20; 
 
-    m_shooterMotor.getConfigurator().apply(talonFXConfigs);
+    shooterMotor_.getConfigurator().apply(talonFXConfigs);
     
   }
   public TalonFX getMotor(){
-    return m_shooterMotor;
+    return shooterMotor_;
 
   }
 
@@ -58,9 +55,9 @@ public class ShooterSubsystem extends SubsystemBase {
     return runOnce(
         () -> {
           /* one-time action goes here */
-          final MotionMagicVelocityVoltage m_request = new MotionMagicVelocityVoltage(0);
-          final TalonFX m_shooterMotor = this.getMotor(); // initialize motor
-          m_shooterMotor.setControl(m_request.withVelocity(rps));
+          final MotionMagicVelocityVoltage request_ = new MotionMagicVelocityVoltage(0);
+          final TalonFX shooterMotor_ = this.getMotor(); // initialize motor
+          shooterMotor_.setControl(request_.withVelocity(rps));
         });
   }
 

@@ -5,19 +5,14 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
-
-import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class ShootCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_subsystem;
-  private final double m_time;
-  private Timer m_timer = new Timer();
+  private final ShooterSubsystem subsystem_;
+  private final double rps_;
+  
 
 
   /**
@@ -26,22 +21,17 @@ public class ShootCommand extends Command {
    * @param subsystem The subsystem used by this command.
    *  
    */
-  public ShootCommand(ShooterSubsystem subsystem , double rps, double time){
-    m_subsystem = subsystem;
-    m_time = time;
-    final MotionMagicVelocityVoltage m_request = new MotionMagicVelocityVoltage(0);
-    final TalonFX m_shooterMotor = m_subsystem.getMotor(); // initialize motor
-    m_shooterMotor.setControl(m_request.withVelocity(rps));
-
+  public ShootCommand(ShooterSubsystem subsystem, double rps){
+    subsystem_ = subsystem;
+    rps_ = rps;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_subsystem);
+    addRequirements(subsystem_);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.ShootCommand(20);
-    m_timer.start();
+    subsystem_.ShootCommand(rps_);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -52,16 +42,14 @@ public class ShootCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.ShootCommand(0);
+    subsystem_.ShootCommand(0);
 
   }
   
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() >= m_time){
-      return true;
-    }
+    
     return false;
   }
 }

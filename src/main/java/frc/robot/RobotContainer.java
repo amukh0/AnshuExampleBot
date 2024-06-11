@@ -47,7 +47,7 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_shooterSubsystem::exampleCondition)
-        .onTrue(new ShootCommand(m_shooterSubsystem, 0, 0));
+        .onTrue(new ShootCommand(m_shooterSubsystem, 20));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
