@@ -15,10 +15,10 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
 
   public static Command ShootAuto(ShooterSubsystem subsystem) {
-    return Commands.sequence(subsystem.ShootCommand(20),
-    new ShootCommand(subsystem, 20).withTimeout(5), 
-    Commands.waitSeconds(5),
-    new ShootCommand(subsystem, 20).withTimeout(5));
+    return Commands.sequence(
+       subsystem.ShootCommand(20).withTimeout(5),
+       Commands.waitSeconds(5),
+       subsystem.ShootCommand(35).withTimeout(5));
   }
 
   public Autos() {

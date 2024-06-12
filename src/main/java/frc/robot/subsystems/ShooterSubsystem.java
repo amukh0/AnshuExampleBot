@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private final TalonFX shooterMotor_ = new TalonFX(0);
+  private final TalonFX shooterMotor_ = new TalonFX(3);
 
 
 
@@ -47,7 +48,12 @@ public class ShooterSubsystem extends SubsystemBase {
    *
    * @return a command 
    */
-
+  public StatusCode SetRPS(double rps){
+    final MotionMagicVelocityVoltage request_ = new MotionMagicVelocityVoltage(0);
+          final TalonFX shooterMotor_ = this.getMotor(); // initialize motor
+          return shooterMotor_.setControl(request_.withVelocity(rps));
+  }
+  
   public Command ShootCommand(double rps) {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
@@ -55,9 +61,7 @@ public class ShooterSubsystem extends SubsystemBase {
     return runOnce(
         () -> {
           /* one-time action goes here */
-          final MotionMagicVelocityVoltage request_ = new MotionMagicVelocityVoltage(0);
-          final TalonFX shooterMotor_ = this.getMotor(); // initialize motor
-          shooterMotor_.setControl(request_.withVelocity(rps));
+          this.SetRPS(rps);
         });
   }
 

@@ -18,9 +18,5 @@ public final class Constants {
 
     
   }
-  public static class ShooterConstants {
-    public static final double rps = 20;
-    public static final double time = 5;
-  }
 }
 
