@@ -7,6 +7,9 @@ package frc.robot;
 
 import frc.robot.commands.Autos;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterSubsystemIO;
+import frc.robot.subsystems.ShooterSubsystemIOTalonFX;
+import frc.robot.subsystems.ShooterSubsytemIOSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -19,9 +22,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ShooterSubsystem shooterSubsystem_ = new ShooterSubsystem();
-  //private final ShootCommand m_shootCommand = new ShootCommand(m_shooterSubsystem, 20, 5);
-  //private final Autos m_auto = new Autos();
+  private final ShooterSubsystem shooterSubsystem_;
+  
+  
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -30,6 +33,20 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    switch (Constants.currentMode) {
+
+      case REAL:
+        shooterSubsystem_ = new ShooterSubsystem(new ShooterSubsystemIOTalonFX());
+        break;
+      
+      case SIM:
+        shooterSubsystem_ = new ShooterSubsystem(new ShooterSubsytemIOSim());
+        break;
+
+      default:
+        shooterSubsystem_ = new ShooterSubsystem(new ShooterSubsystemIO() {});
+        break;
+    }
     configureBindings();
   }
 

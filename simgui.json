@@ -3,24 +3,71 @@
     "Other Devices": {
       "Talon FX (v6)[0]": {
         "header": {
-          "open": true
+          "open": false
         }
       },
       "Talon FX (v6)[0]/Fwd Limit": {
         "header": {
-          "open": true
+          "open": false
         }
       },
       "Talon FX (v6)[0]/Rev Limit": {
         "header": {
-          "open": true
+          "open": false
         }
       },
       "Talon FX (v6)[0]/Rotor Sensor": {
         "header": {
+          "open": false
+        }
+      },
+      "Talon FX (v6)[3]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[3]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[3]/Rev Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[3]/Rotor Sensor": {
+        "header": {
           "open": true
         }
       }
+    },
+    "RoboRIO": {
+      "5V Rail": {
+        "open": false
+      },
+      "6V Rail": {
+        "open": false
+      },
+      "RoboRIO Input": {
+        "open": false
+      }
     }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "LiveWindow": {
+        ".status": {
+          "open": true
+        },
+        "open": true
+      },
+      "Shuffleboard": {
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
   }
 }

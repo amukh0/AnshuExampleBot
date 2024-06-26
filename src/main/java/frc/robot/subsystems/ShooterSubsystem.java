@@ -4,43 +4,20 @@
 
 package frc.robot.subsystems;
 
-
-import com.ctre.phoenix6.StatusCode;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
+import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private final TalonFX shooterMotor_ = new TalonFX(3);
+  private final ShooterSubsystemIO io;
+  private final ShooterSubsystemIOInputsAutoLogged inputs = new ShooterSubsystemIOInputsAutoLogged();
 
 
-
-  public ShooterSubsystem() {
-  var talonFXConfigs = new TalonFXConfiguration();
-
-   
-    var slot0Configs = talonFXConfigs.Slot0;
-    slot0Configs.kS = 0; 
-    slot0Configs.kV = 0.12; 
-    slot0Configs.kA = 0.01; 
-    slot0Configs.kP = 0; 
-    slot0Configs.kI = 0; 
-    slot0Configs.kD = 0; 
-
+  public ShooterSubsystem(ShooterSubsystemIO io) {
+    this.io = io;
     
-    var motionMagicConfigs = talonFXConfigs.MotionMagic;
-    motionMagicConfigs.MotionMagicCruiseVelocity = 20; 
-
-    shooterMotor_.getConfigurator().apply(talonFXConfigs);
-    
-  }
-  public TalonFX getMotor(){
-    return shooterMotor_;
-
   }
 
   /**
@@ -48,20 +25,16 @@ public class ShooterSubsystem extends SubsystemBase {
    *
    * @return a command 
    */
-  public StatusCode SetRPS(double rps){
-    final MotionMagicVelocityVoltage request_ = new MotionMagicVelocityVoltage(0);
-          final TalonFX shooterMotor_ = this.getMotor(); // initialize motor
-          return shooterMotor_.setControl(request_.withVelocity(rps));
-  }
-  
+
   public Command ShootCommand(double rps) {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
+     io.setRPS(rps);
 
     return runOnce(
         () -> {
           /* one-time action goes here */
-          this.SetRPS(rps);
+  
         });
   }
 
@@ -82,6 +55,8 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    io.updateInputs(inputs);
+    Logger.processInputs("Shooter", inputs);
   }
 
   @Override
