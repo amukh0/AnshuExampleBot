@@ -42,6 +42,13 @@
         }
       }
     },
+    "PowerDistributions": {
+      "0": {
+        "PowerDistribution[0]": {
+          "open": true
+        }
+      }
+    },
     "RoboRIO": {
       "5V Rail": {
         "open": false
@@ -57,10 +64,29 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo"
+    },
+    "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {
     "transitory": {
+      "AdvantageKit": {
+        "PowerDistribution": {
+          "open": true
+        },
+        "Shooter": {
+          "open": true
+        },
+        "open": true
+      },
+      "FMSInfo": {
+        "open": true
+      },
       "LiveWindow": {
         ".status": {
           "open": true
@@ -73,6 +99,45 @@
     }
   },
   "NetworkTables Info": {
+    "AdvantageScope@1": {
+      "Publishers": {
+        "open": true
+      },
+      "Subscribers": {
+        "open": true
+      },
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "Subscribers": {
+        "open": true
+      },
+      "open": true
+    },
     "visible": true
+  },
+  "Plot": {
+    "Plot <0>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.8500000238418579
+          ],
+          "height": 332
+        }
+      ],
+      "window": {
+        "visible": false
+      }
+    }
   }
 }

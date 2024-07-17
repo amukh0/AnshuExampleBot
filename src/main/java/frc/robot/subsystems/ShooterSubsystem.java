@@ -29,7 +29,10 @@ public class ShooterSubsystem extends SubsystemBase {
   public Command ShootCommand(double rps) {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return startEnd(() -> {io.setRPS(rps);}, () -> {io.setRPS(0.0);});
+    return runOnce( 
+      () -> {
+        io.setRPS(rps);
+      });
 
   }
 

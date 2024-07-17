@@ -9,6 +9,7 @@ public class ShooterSubsytemIOSim implements ShooterSubsystemIO{
 
     @Override
     public void updateInputs(ShooterSubsystemIOInputs inputs){
+        shooterMotorSim_.update(0.02);
         inputs.shooterVelocity = shooterMotorSim_.getAngularVelocityRPM();
     }
 

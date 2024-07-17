@@ -16,16 +16,17 @@ public class ShooterSubsystemIOTalonFX implements ShooterSubsystemIO {
 
    
         var slot0Configs = talonFXConfigs.Slot0;
-        slot0Configs.kS = 0; 
+        slot0Configs.kS = 0.25; 
         slot0Configs.kV = 0.12; 
         slot0Configs.kA = 0.01; 
-        slot0Configs.kP = 0; 
+        slot0Configs.kP = .11; 
         slot0Configs.kI = 0; 
         slot0Configs.kD = 0; 
 
     
         var motionMagicConfigs = talonFXConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 20; 
+        motionMagicConfigs.MotionMagicAcceleration = 400;
+        motionMagicConfigs.MotionMagicJerk = 4000;
 
         shooterMotor_.getConfigurator().apply(talonFXConfigs);
 
